@@ -1,0 +1,12 @@
+.env
+.venv
+
+aihub.sh
+
+notebooks/**
+data/**
+
+**/__pycache__
+**/*.zip
+**/*.xlsx
+**/*.csv
