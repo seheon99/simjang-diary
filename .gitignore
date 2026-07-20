@@ -5,6 +5,7 @@ aihub.sh
 
 notebooks/**
 data/**
+models/**
 
 **/__pycache__
 **/*.zip
