@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		76AA32BD30111B69008FB0D4 /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = 76AA32BC30111B69008FB0D4 /* Tokenizers */; };
+		76AA32BF30111B69008FB0D4 /* Transformers in Frameworks */ = {isa = PBXBuildFile; productRef = 76AA32BE30111B69008FB0D4 /* Transformers */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		76220EA5300B72FF008AB669 /* summer-homework-diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "summer-homework-diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -13,6 +18,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		76220EA7300B72FF008AB669 /* summer-homework-diary */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			explicitFolders = (
+				Resources/tokenizer,
+			);
 			path = "summer-homework-diary";
 			sourceTree = "<group>";
 		};
@@ -23,6 +31,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76AA32BF30111B69008FB0D4 /* Transformers in Frameworks */,
+				76AA32BD30111B69008FB0D4 /* Tokenizers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +75,8 @@
 			);
 			name = "summer-homework-diary";
 			packageProductDependencies = (
+				76AA32BC30111B69008FB0D4 /* Tokenizers */,
+				76AA32BE30111B69008FB0D4 /* Transformers */,
 			);
 			productName = "summer-homework-diary";
 			productReference = 76220EA5300B72FF008AB669 /* summer-homework-diary.app */;
@@ -94,6 +106,9 @@
 			);
 			mainGroup = 76220E9C300B72FF008AB669;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				76AA32BB30111B69008FB0D4 /* XCRemoteSwiftPackageReference "swift-transformers" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 76220EA6300B72FF008AB669 /* Products */;
 			projectDirPath = "";
@@ -249,6 +264,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U75XF8PBP6;
@@ -281,6 +297,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U75XF8PBP6;
@@ -330,6 +347,32 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		76AA32BB30111B69008FB0D4 /* XCRemoteSwiftPackageReference "swift-transformers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huggingface/swift-transformers";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.3;
+			};
+			traits = (
+			);
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		76AA32BC30111B69008FB0D4 /* Tokenizers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76AA32BB30111B69008FB0D4 /* XCRemoteSwiftPackageReference "swift-transformers" */;
+			productName = Tokenizers;
+		};
+		76AA32BE30111B69008FB0D4 /* Transformers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76AA32BB30111B69008FB0D4 /* XCRemoteSwiftPackageReference "swift-transformers" */;
+			productName = Transformers;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 76220E9D300B72FF008AB669 /* Project object */;
 }

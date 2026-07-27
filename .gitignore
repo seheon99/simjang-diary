@@ -3,6 +3,11 @@
 **/*.xlsx
 **/*.csv
 **/*.mlpackage
+**/config.json
+**/generation_config.json
+**/tokenizer.json
+**/tokenizer_config.json
+**/chat_template.jinja
 
 # Created by https://www.toptal.com/developers/gitignore/api/swift,macos,linux,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=swift,macos,linux,windows

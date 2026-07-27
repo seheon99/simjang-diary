@@ -36,11 +36,15 @@ enum LoadState {
 }
 
 struct ContentView: View {
+    private let modelName = "kanana-1.5-2.1b-lut4-ctx256"
+
     @State private var engine: LLMEngine?
     @State private var loadState: LoadState = .notLoaded
     @State private var message = ""
     @State private var userMessage = ""
     @State private var botMessage = ""
+    @State private var includeSystemPrompt = false
+    @State private var isGenerating = false
     @FocusState private var isTextFieldFocused: Bool
 
     var body: some View {
@@ -49,11 +53,11 @@ struct ContentView: View {
 
             Button {
                 Task {
-                    await loadModel()
+                    await loadModel(modelName)
                 }
             } label: {
                 Label {
-                    Text(loadState.title)
+                    Text("\(loadState.title) (\(modelName))")
                 } icon: {
                     switch loadState {
                     case .notLoaded:
@@ -62,7 +66,8 @@ struct ContentView: View {
                         ProgressView().controlSize(.small)
                     case .loaded:
                         Image(
-                            systemName: "square.and.arrow.down.badge.checkmark"
+                            systemName:
+                                "square.and.arrow.down.badge.checkmark"
                         )
                     }
                 }
@@ -81,6 +86,23 @@ struct ContentView: View {
 
             Text(botMessage).font(.body)
 
+            Spacer().frame(maxHeight: .infinity)
+
+            Button(action: {
+                includeSystemPrompt.toggle()
+            }) {
+                Label {
+                    Text("시스템 프롬프트")
+                } icon: {
+                    Image(
+                        systemName: includeSystemPrompt
+                            ? "checkmark.square.fill" : "square"
+                    )
+                }
+            }
+            .buttonStyle(.glassProminent)
+            .tint(includeSystemPrompt ? .accentColor : .gray)
+
             HStack(alignment: .center, spacing: 14) {
                 TextField("메시지를 입력하세요", text: $userMessage, axis: .vertical)
                     .textFieldStyle(.plain)
@@ -88,15 +110,27 @@ struct ContentView: View {
                     .focused($isTextFieldFocused)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .layoutPriority(1)
+
                 Button {
-                    print("Hello")
+                    Task { try await sendDiary(includeSystemPrompt) }
                 } label: {
-                    Image(systemName: "paperplane")
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundStyle(.gray)
+                    if isGenerating {
+                        ProgressView().controlSize(.small)
+                    } else {
+                        Image(systemName: "paperplane")
+                            .font(.system(size: 20, weight: .semibold))
+                            .foregroundStyle(.gray)
+                    }
                 }
                 .buttonStyle(.glass)
                 .layoutPriority(2)
+                .disabled(
+                    loadState != .loaded
+                        || isGenerating
+                        || userMessage.trimmingCharacters(
+                            in: .whitespacesAndNewlines
+                        ).isEmpty
+                )
             }
             .padding(16)
             .glassEffect(
@@ -108,13 +142,39 @@ struct ContentView: View {
     }
 
     @MainActor
-    private func loadModel() async {
+    private func loadModel(_ modelName: String) async {
         do {
             loadState = .loading
-            engine = try await LLMEngine()
+            engine = try await LLMEngine(modelName: modelName)
             loadState = .loaded
         } catch {
             loadState = .notLoaded
+            message = error.localizedDescription
+        }
+    }
+
+    @MainActor
+    private func sendDiary(_ includeSystemPrompt: Bool) async throws {
+        guard let engine else {
+            throw LLMEngineError.modelNotFound("engine")
+        }
+
+        let diary = userMessage.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        isGenerating = true
+        message = ""
+        defer { isGenerating = false }
+
+        do {
+            botMessage = try await engine.generate(
+                diary: diary,
+                gender: "남",
+                age: 28,
+                includeSystemPrompt: includeSystemPrompt
+            )
+            userMessage = ""
+            isTextFieldFocused = false
+        } catch {
             message = error.localizedDescription
         }
     }
