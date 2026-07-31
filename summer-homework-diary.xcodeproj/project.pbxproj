@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		76AA32BD30111B69008FB0D4 /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = 76AA32BC30111B69008FB0D4 /* Tokenizers */; };
 		76BB000130111B69008FB0D4 /* MLXLLM in Frameworks */ = {isa = PBXBuildFile; productRef = 76BB001130111B69008FB0D4 /* MLXLLM */; };
 		76BB000230111B69008FB0D4 /* MLXLMCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 76BB001230111B69008FB0D4 /* MLXLMCommon */; };
 		76BB000330111B69008FB0D4 /* MLXHuggingFace in Frameworks */ = {isa = PBXBuildFile; productRef = 76BB001330111B69008FB0D4 /* MLXHuggingFace */; };
-		76AA32BD30111B69008FB0D4 /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = 76AA32BC30111B69008FB0D4 /* Tokenizers */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,8 +21,7 @@
 		76BB003130111B69008FB0D4 /* Exceptions for "summer-homework-diary" folder in "summer-homework-diary" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Resources/kanana-1.5-2.1b-lut4-ctx256.mlpackage,
-				Resources/tokenizer,
+				"Resources/kanana-1.5-2.1b-lut4-ctx256.mlpackage",
 			);
 			target = 76220EA4300B72FF008AB669 /* summer-homework-diary */;
 		};
@@ -35,7 +34,7 @@
 				76BB003130111B69008FB0D4 /* Exceptions for "summer-homework-diary" folder in "summer-homework-diary" target */,
 			);
 			explicitFolders = (
-				Resources/kanana-1.5-2.1b-diary-100-4bit,
+				"Resources/kanana-1.5-2.1b-diary-100-4bit",
 			);
 			path = "summer-homework-diary";
 			sourceTree = "<group>";
@@ -370,14 +369,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		76BB002130111B69008FB0D4 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ml-explore/mlx-swift-lm";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.31.3;
-			};
-		};
 		76AA32BB30111B69008FB0D4 /* XCRemoteSwiftPackageReference "swift-transformers" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/huggingface/swift-transformers";
@@ -388,9 +379,22 @@
 			traits = (
 			);
 		};
+		76BB002130111B69008FB0D4 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ml-explore/mlx-swift-lm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.31.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		76AA32BC30111B69008FB0D4 /* Tokenizers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76AA32BB30111B69008FB0D4 /* XCRemoteSwiftPackageReference "swift-transformers" */;
+			productName = Tokenizers;
+		};
 		76BB001130111B69008FB0D4 /* MLXLLM */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 76BB002130111B69008FB0D4 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */;
@@ -405,11 +409,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 76BB002130111B69008FB0D4 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */;
 			productName = MLXHuggingFace;
-		};
-		76AA32BC30111B69008FB0D4 /* Tokenizers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 76AA32BB30111B69008FB0D4 /* XCRemoteSwiftPackageReference "swift-transformers" */;
-			productName = Tokenizers;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
