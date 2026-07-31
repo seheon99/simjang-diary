@@ -92,8 +92,10 @@ struct WriteView: View {
             userMessage = ""
             isTextFieldFocused = false
 
-            path.removeLast()
-            path.append(DiaryRoute.detail(entry))
+            if !path.isEmpty {
+                path.removeLast()
+                path.append(DiaryRoute.detail(entry))
+            }
         } catch {
             message = error.localizedDescription
         }
