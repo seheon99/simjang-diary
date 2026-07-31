@@ -14,6 +14,7 @@ struct WriteView: View {
     @State private var userMessage = ""
     @State private var message = ""
     @State private var isGenerating = false
+    @State private var hasDisappeared = false
     @FocusState private var isTextFieldFocused: Bool
 
     private let modelName = "kanana-1.5-2.1b-diary-100-4bit"
@@ -66,6 +67,9 @@ struct WriteView: View {
         .padding()
         .navigationTitle("일기 작성")
         .navigationBarTitleDisplayMode(.inline)
+        .onDisappear {
+            hasDisappeared = true
+        }
     }
 
     @MainActor
@@ -92,7 +96,7 @@ struct WriteView: View {
             userMessage = ""
             isTextFieldFocused = false
 
-            if !path.isEmpty {
+            if !hasDisappeared {
                 path.removeLast()
                 path.append(DiaryRoute.detail(entry))
             }
