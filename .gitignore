@@ -10,6 +10,8 @@ summer-homework-diary/Resources/kanana-1.5-2.1b-diary-100-4bit/
 **/tokenizer_config.json
 **/chat_template.jinja
 
+*.trace
+
 # Created by https://www.toptal.com/developers/gitignore/api/swift,macos,linux,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=swift,macos,linux,windows
 
