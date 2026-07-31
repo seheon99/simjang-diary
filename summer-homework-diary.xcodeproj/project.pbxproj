@@ -7,19 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		76BB000130111B69008FB0D4 /* MLXLLM in Frameworks */ = {isa = PBXBuildFile; productRef = 76BB001130111B69008FB0D4 /* MLXLLM */; };
+		76BB000230111B69008FB0D4 /* MLXLMCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 76BB001230111B69008FB0D4 /* MLXLMCommon */; };
+		76BB000330111B69008FB0D4 /* MLXHuggingFace in Frameworks */ = {isa = PBXBuildFile; productRef = 76BB001330111B69008FB0D4 /* MLXHuggingFace */; };
 		76AA32BD30111B69008FB0D4 /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = 76AA32BC30111B69008FB0D4 /* Tokenizers */; };
-		76AA32BF30111B69008FB0D4 /* Transformers in Frameworks */ = {isa = PBXBuildFile; productRef = 76AA32BE30111B69008FB0D4 /* Transformers */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		76220EA5300B72FF008AB669 /* summer-homework-diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "summer-homework-diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		76BB003130111B69008FB0D4 /* Exceptions for "summer-homework-diary" folder in "summer-homework-diary" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/kanana-1.5-2.1b-lut4-ctx256.mlpackage,
+				Resources/tokenizer,
+			);
+			target = 76220EA4300B72FF008AB669 /* summer-homework-diary */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		76220EA7300B72FF008AB669 /* summer-homework-diary */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				76BB003130111B69008FB0D4 /* Exceptions for "summer-homework-diary" folder in "summer-homework-diary" target */,
+			);
 			explicitFolders = (
-				Resources/tokenizer,
+				Resources/kanana-1.5-2.1b-diary-100-4bit,
 			);
 			path = "summer-homework-diary";
 			sourceTree = "<group>";
@@ -31,7 +47,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76AA32BF30111B69008FB0D4 /* Transformers in Frameworks */,
+				76BB000130111B69008FB0D4 /* MLXLLM in Frameworks */,
+				76BB000230111B69008FB0D4 /* MLXLMCommon in Frameworks */,
+				76BB000330111B69008FB0D4 /* MLXHuggingFace in Frameworks */,
 				76AA32BD30111B69008FB0D4 /* Tokenizers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,8 +93,10 @@
 			);
 			name = "summer-homework-diary";
 			packageProductDependencies = (
+				76BB001130111B69008FB0D4 /* MLXLLM */,
+				76BB001230111B69008FB0D4 /* MLXLMCommon */,
+				76BB001330111B69008FB0D4 /* MLXHuggingFace */,
 				76AA32BC30111B69008FB0D4 /* Tokenizers */,
-				76AA32BE30111B69008FB0D4 /* Transformers */,
 			);
 			productName = "summer-homework-diary";
 			productReference = 76220EA5300B72FF008AB669 /* summer-homework-diary.app */;
@@ -107,6 +127,7 @@
 			mainGroup = 76220E9C300B72FF008AB669;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				76BB002130111B69008FB0D4 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */,
 				76AA32BB30111B69008FB0D4 /* XCRemoteSwiftPackageReference "swift-transformers" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -349,6 +370,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		76BB002130111B69008FB0D4 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ml-explore/mlx-swift-lm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.31.3;
+			};
+		};
 		76AA32BB30111B69008FB0D4 /* XCRemoteSwiftPackageReference "swift-transformers" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/huggingface/swift-transformers";
@@ -362,15 +391,25 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		76BB001130111B69008FB0D4 /* MLXLLM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76BB002130111B69008FB0D4 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */;
+			productName = MLXLLM;
+		};
+		76BB001230111B69008FB0D4 /* MLXLMCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76BB002130111B69008FB0D4 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */;
+			productName = MLXLMCommon;
+		};
+		76BB001330111B69008FB0D4 /* MLXHuggingFace */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76BB002130111B69008FB0D4 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */;
+			productName = MLXHuggingFace;
+		};
 		76AA32BC30111B69008FB0D4 /* Tokenizers */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 76AA32BB30111B69008FB0D4 /* XCRemoteSwiftPackageReference "swift-transformers" */;
 			productName = Tokenizers;
-		};
-		76AA32BE30111B69008FB0D4 /* Transformers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 76AA32BB30111B69008FB0D4 /* XCRemoteSwiftPackageReference "swift-transformers" */;
-			productName = Transformers;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

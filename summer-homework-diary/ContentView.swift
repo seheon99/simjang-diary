@@ -36,7 +36,7 @@ enum LoadState {
 }
 
 struct ContentView: View {
-    private let modelName = "kanana-1.5-2.1b-lut4-ctx256"
+    private let modelName = "kanana-1.5-2.1b-diary-100-4bit"
 
     @State private var engine: LLMEngine?
     @State private var loadState: LoadState = .notLoaded
