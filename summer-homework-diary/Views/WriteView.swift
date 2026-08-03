@@ -35,15 +35,10 @@ struct WriteView: View {
                 text: $userMessage,
                 axis: .vertical
             )
-            .textFieldStyle(.plain)
-            .lineLimit(5...15)
+            .lineLimit(5...20)
             .focused($isTextFieldFocused)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(16)
-            .glassEffect(
-                .regular,
-                in: RoundedRectangle(cornerRadius: 20, style: .continuous)
-            )
+            .textFieldStyle(.roundedBorder)
 
             Spacer()
 
@@ -51,12 +46,12 @@ struct WriteView: View {
                 Task { await submit() }
             } label: {
                 if isGenerating {
-                    ProgressView().controlSize(.small)
+                    ProgressView().controlSize(.large)
                 } else {
-                    Label("제출", systemImage: "paperplane")
+                    Label("제출", systemImage: "paperplane").controlSize(.large).padding(.vertical, 6)
                 }
             }
-            .buttonStyle(.glassProminent)
+            .buttonStyle(.glassProminent).buttonSizing(.flexible)
             .disabled(
                 isGenerating
                     || userMessage.trimmingCharacters(
