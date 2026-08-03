@@ -38,7 +38,7 @@ struct DiaryListView: View {
                     }
                 }
             }
-            .navigationTitle("여름방학 일기")
+            .navigationTitle("일기장")
             .navigationDestination(for: DiaryRoute.self) { route in
                 switch route {
                 case .write:
