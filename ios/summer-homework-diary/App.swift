@@ -12,7 +12,7 @@ import SwiftData
 struct DiaryApp: App {
     var body: some Scene {
         WindowGroup {
-            DiaryListView()
+            DiaryListScreen()
         }
         .modelContainer(for: DiaryEntry.self)
     }

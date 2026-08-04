@@ -6,7 +6,7 @@
 import SwiftUI
 import SwiftData
 
-struct WriteView: View {
+struct DiaryWriteScreen: View {
     @Binding var path: NavigationPath
 
     @Environment(\.modelContext) private var modelContext
@@ -103,6 +103,6 @@ struct WriteView: View {
 
 #Preview {
     NavigationStack {
-        WriteView(path: .constant(NavigationPath()))
+        DiaryWriteScreen(path: .constant(NavigationPath()))
     }
 }

@@ -11,7 +11,7 @@ enum DiaryRoute: Hashable {
     case detail(DiaryEntry)
 }
 
-struct DiaryListView: View {
+struct DiaryListScreen: View {
     @Query(sort: \DiaryEntry.date, order: .reverse) private var entries: [DiaryEntry]
     @State private var path = NavigationPath()
 
@@ -42,9 +42,9 @@ struct DiaryListView: View {
             .navigationDestination(for: DiaryRoute.self) { route in
                 switch route {
                 case .write:
-                    WriteView(path: $path)
+                    DiaryWriteScreen(path: $path)
                 case .detail(let entry):
-                    EntryDetailView(entry: entry)
+                    DiaryDetailScreen(entry: entry)
                 }
             }
             .overlay(alignment: .bottomTrailing) {
@@ -65,6 +65,6 @@ struct DiaryListView: View {
 }
 
 #Preview {
-    DiaryListView()
+    DiaryListScreen()
         .modelContainer(for: DiaryEntry.self, inMemory: true)
 }

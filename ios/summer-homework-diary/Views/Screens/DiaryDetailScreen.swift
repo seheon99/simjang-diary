@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct EntryDetailView: View {
+struct DiaryDetailScreen: View {
     let entry: DiaryEntry
 
     var body: some View {
@@ -36,7 +36,7 @@ struct EntryDetailView: View {
 
 #Preview {
     NavigationStack {
-        EntryDetailView(
+        DiaryDetailScreen(
             entry: DiaryEntry(
                 date: .now,
                 text: "오늘은 도서관에서 책을 읽었다.",
