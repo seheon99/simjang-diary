@@ -22,8 +22,8 @@ jobs:
     steps:
       - uses: seheon99/build-and-deploy@v1
         with:
-          service-name: summer-homework-diary-web
-          registry: ghcr.io/seheon99/summer-homework-diary-web
+          service-name: simjang-diary-web
+          registry: ghcr.io/seheon99/simjang-diary-web
           context: web
           dry-run: ${{ github.event_name == 'pull_request' }}
           ssh-host: ${{ secrets.SSH_HOST }}
