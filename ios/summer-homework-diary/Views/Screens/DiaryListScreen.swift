@@ -17,6 +17,7 @@ struct DiaryListScreen: View {
 
     var body: some View {
         NavigationStack(path: $path) {
+            DiaryCalendarView()
             Group {
                 if entries.isEmpty {
                     ContentUnavailableView(
