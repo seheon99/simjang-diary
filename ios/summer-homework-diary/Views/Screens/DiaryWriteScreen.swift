@@ -108,7 +108,7 @@ struct DiaryWriteScreen: View {
             bySettingHour: timeOfDay.hour ?? 0,
             minute: timeOfDay.minute ?? 0,
             second: timeOfDay.second ?? 0,
-            of: date
+            of: calendar.startOfDay(for: date)
         ) ?? date
     }
 }

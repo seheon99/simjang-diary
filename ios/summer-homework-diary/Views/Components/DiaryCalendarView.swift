@@ -18,7 +18,10 @@ struct DiaryCalendarView: UIViewRepresentable {
         calendarView.calendar = gregorianCalendar
         calendarView.locale = Locale(identifier: "ko_KR")
         calendarView.fontDesign = .rounded
-        calendarView.availableDateRange = DateInterval(start: .distantPast, end: .now)
+        calendarView.availableDateRange = DateInterval(
+            start: .distantPast,
+            end: Calendar.current.startOfDay(for: .now).addingTimeInterval(86_400 - 1)
+        )
         calendarView.delegate = context.coordinator
         calendarView.selectionBehavior = UICalendarSelectionSingleDate(delegate: context.coordinator)
 
