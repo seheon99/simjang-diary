@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+
+import { ChevronLeft } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { buttonVariants } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "개인정보 처리방침 | 심장",
@@ -60,11 +67,19 @@ const sections: { title: string; body: string[] }[] = [
 
 export default function PrivacyPage() {
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 px-4 py-12">
+    <main className="mx-auto flex flex-col w-full max-w-2xl gap-6 px-4 py-12">
       <Card>
+        <Link
+          href="/"
+          className={cn(buttonVariants({ variant: "link" }), "mr-auto")}
+        >
+          <ChevronLeft /> 뒤로가기
+        </Link>
         <CardHeader>
           <CardTitle className="text-2xl">심장 개인정보 처리방침</CardTitle>
-          <p className="text-sm text-muted-foreground">시행일: 2026년 8월 3일</p>
+          <p className="text-sm text-muted-foreground">
+            시행일: 2026년 8월 3일
+          </p>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">
           <p className="text-sm leading-relaxed">
@@ -77,7 +92,10 @@ export default function PrivacyPage() {
             <section key={title} className="flex flex-col gap-2">
               <h2 className="text-base font-semibold">{title}</h2>
               {body.map((paragraph) => (
-                <p key={paragraph} className="text-sm leading-relaxed text-muted-foreground">
+                <p
+                  key={paragraph}
+                  className="text-sm leading-relaxed text-muted-foreground"
+                >
                   {paragraph}
                 </p>
               ))}
