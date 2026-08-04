@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Mail, ShieldCheck } from "lucide-react";
+
+import { ChevronLeft, Mail, ShieldCheck } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Accordion,
@@ -9,10 +13,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
+import { buttonVariants } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "지원 | 심장",
-  description: "심장 앱 이용 중 궁금한 점이나 문제를 해결할 수 있는 지원 페이지입니다.",
+  description:
+    "심장 앱 이용 중 궁금한 점이나 문제를 해결할 수 있는 지원 페이지입니다.",
 };
 
 const SUPPORT_EMAIL = "support.diary@seheon.kr";
@@ -29,7 +35,8 @@ const qna: { question: string; answer: string }[] = [
   },
   {
     question: "인터넷 연결이 없어도 AI 코멘트를 받을 수 있나요?",
-    answer: "네. AI 코멘트는 기기에서 직접 생성되므로 인터넷 연결 없이도 동일하게 동작합니다.",
+    answer:
+      "네. AI 코멘트는 기기에서 직접 생성되므로 인터넷 연결 없이도 동일하게 동작합니다.",
   },
   {
     question: "작성한 일기를 삭제하면 어떻게 되나요?",
@@ -42,10 +49,17 @@ export default function SupportPage() {
   return (
     <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 px-4 py-12">
       <Card>
+        <Link
+          href="/"
+          className={cn(buttonVariants({ variant: "link" }), "mr-auto")}
+        >
+          <ChevronLeft /> 뒤로가기
+        </Link>
         <CardHeader>
           <CardTitle className="text-2xl">심장 지원</CardTitle>
           <p className="text-sm text-muted-foreground">
-            이용 중 궁금한 점이나 문제가 있다면 아래 방법으로 도움을 받으실 수 있습니다.
+            이용 중 궁금한 점이나 문제가 있다면 아래 방법으로 도움을 받으실 수
+            있습니다.
           </p>
         </CardHeader>
         <CardContent className="flex flex-col gap-8">
@@ -90,7 +104,9 @@ export default function SupportPage() {
           <Separator />
 
           <section className="flex flex-col gap-1 text-sm text-muted-foreground">
-            <h2 className="text-base font-semibold text-foreground">서비스 정보</h2>
+            <h2 className="text-base font-semibold text-foreground">
+              서비스 정보
+            </h2>
             <p>이름: 심장</p>
             <p>개발자: 유세헌</p>
             <p>지원 이메일: {SUPPORT_EMAIL}</p>
