@@ -7,28 +7,35 @@ import SwiftUI
 import SwiftData
 
 enum DiaryRoute: Hashable {
-    case write
+    case write(Date)
     case detail(DiaryEntry)
 }
 
 struct DiaryListScreen: View {
     @Query(sort: \DiaryEntry.date, order: .reverse) private var entries: [DiaryEntry]
     @State private var path = NavigationPath()
+    @State private var selectedDate = Calendar.current.startOfDay(for: .now)
+
+    private var entriesByDay: [Date: [DiaryEntry]] {
+        Dictionary(grouping: entries) { Calendar.current.startOfDay(for: $0.date) }
+    }
 
     var body: some View {
         NavigationStack(path: $path) {
-            DiaryCalendarView()
-            Group {
-                if entries.isEmpty {
+            VStack(spacing: 0) {
+                DiaryCalendarView(entriesByDay: entriesByDay, selectedDate: $selectedDate)
+
+                let dayEntries = entriesByDay[selectedDate] ?? []
+                if dayEntries.isEmpty {
                     ContentUnavailableView(
-                        "아직 작성한 일기가 없어요",
+                        "이 날짜엔 쓴 일기가 없어요",
                         systemImage: "book.closed"
                     )
                 } else {
-                    List(entries) { entry in
+                    List(dayEntries) { entry in
                         NavigationLink(value: DiaryRoute.detail(entry)) {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text(entry.date, style: .date)
+                                Text(entry.date, style: .time)
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                                 Text(entry.text)
@@ -42,15 +49,15 @@ struct DiaryListScreen: View {
             .navigationTitle("일기장")
             .navigationDestination(for: DiaryRoute.self) { route in
                 switch route {
-                case .write:
-                    DiaryWriteScreen(path: $path)
+                case .write(let date):
+                    DiaryWriteScreen(path: $path, date: date)
                 case .detail(let entry):
                     DiaryDetailScreen(entry: entry)
                 }
             }
             .overlay(alignment: .bottomTrailing) {
                 Button {
-                    path.append(DiaryRoute.write)
+                    path.append(DiaryRoute.write(selectedDate))
                 } label: {
                     Image(systemName: "plus")
                         .font(.system(size: 20, weight: .semibold))
