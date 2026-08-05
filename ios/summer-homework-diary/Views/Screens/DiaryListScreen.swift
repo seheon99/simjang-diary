@@ -46,7 +46,6 @@ struct DiaryListScreen: View {
                     }
                 }
             }
-            .navigationTitle("일기장")
             .navigationDestination(for: DiaryRoute.self) { route in
                 switch route {
                 case .write(let date):
@@ -60,9 +59,8 @@ struct DiaryListScreen: View {
                     path.append(DiaryRoute.write(selectedDate))
                 } label: {
                     Image(systemName: "plus")
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundStyle(.white)
-                        .frame(width: 56, height: 56)
+                        .font(.system(size: 16, weight: .semibold))
+                        .frame(width: 36, height: 36)
                 }
                 .buttonStyle(.glassProminent)
                 .clipShape(Circle())
