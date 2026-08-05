@@ -17,7 +17,7 @@ struct DiaryCalendarView: UIViewRepresentable {
 
         calendarView.calendar = gregorianCalendar
         calendarView.locale = Locale(identifier: "ko_KR")
-        calendarView.fontDesign = .rounded
+        calendarView.fontDesign = .serif
         calendarView.availableDateRange = DateInterval(
             start: .distantPast,
             end: Calendar.current.startOfDay(for: .now).addingTimeInterval(86_400 - 1)
@@ -66,19 +66,11 @@ struct DiaryCalendarView: UIViewRepresentable {
             guard count > 0 else { return nil }
 
             return .customView {
-                let stack = UIStackView()
-                stack.axis = .horizontal
-                stack.spacing = 2
-                for _ in 0..<count {
-                    let dot = UIView()
-                    dot.backgroundColor = .systemOrange
-                    dot.layer.cornerRadius = 2
-                    dot.translatesAutoresizingMaskIntoConstraints = false
-                    dot.widthAnchor.constraint(equalToConstant: 4).isActive = true
-                    dot.heightAnchor.constraint(equalToConstant: 4).isActive = true
-                    stack.addArrangedSubview(dot)
-                }
-                return stack
+                let width = CGFloat(count * 6)
+                let view = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 6))
+                view.backgroundColor = .tintColor
+                view.layer.cornerRadius = 3
+                return view
             }
         }
 
@@ -90,5 +82,15 @@ struct DiaryCalendarView: UIViewRepresentable {
 }
 
 #Preview {
-    DiaryCalendarView(entriesByDay: [:], selectedDate: .constant(.now))
+    let calendar = Calendar.current
+    let entriesByDay: [Date: [DiaryEntry]] = [-3, -3, -1, -1, -1, 0].reduce(into: [:]) { result, offset in
+        let day = calendar.startOfDay(for: calendar.date(byAdding: .day, value: offset, to: .now)!)
+        let diary = DiaryEntry(date: day, text: "미리보기 일기 \(offset)")
+        if result[day] != nil {
+            result[day]?.append(diary)
+        } else {
+            result[day] = [diary]
+        }
+    }
+    DiaryCalendarView(entriesByDay: entriesByDay, selectedDate: .constant(.now))
 }
