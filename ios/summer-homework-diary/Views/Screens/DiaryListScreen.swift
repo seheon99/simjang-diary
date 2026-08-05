@@ -71,6 +71,22 @@ struct DiaryListScreen: View {
 }
 
 #Preview {
-    DiaryListScreen()
-        .modelContainer(for: DiaryEntry.self, inMemory: true)
+    let container = try! ModelContainer(
+        for: DiaryEntry.self,
+        configurations: ModelConfiguration(isStoredInMemoryOnly: true)
+    )
+    let calendar = Calendar.current
+    let today = calendar.startOfDay(for: .now)
+    let samples = [
+        DiaryEntry(date: today, text: "오늘은 수학 숙제를 끝냈다.", feedback: "잘했어요!"),
+        DiaryEntry(date: calendar.date(byAdding: .day, value: -1, to: today)!, text: "친구랑 수영장에 갔다.", feedback: nil),
+        DiaryEntry(date: calendar.date(byAdding: .day, value: -1, to: today)!, text: "친구랑 수영장에 갔다.", feedback: nil),
+        DiaryEntry(date: calendar.date(byAdding: .day, value: -1, to: today)!, text: "친구랑 수영장에 갔다.", feedback: nil),
+        DiaryEntry(date: calendar.date(byAdding: .day, value: -3, to: today)!, text: "책을 읽고 독서록을 썼다.", feedback: "다음엔 더 자세히 써보자."),
+        DiaryEntry(date: calendar.date(byAdding: .day, value: -3, to: today)!, text: "책을 읽고 독서록을 썼다.", feedback: "다음엔 더 자세히 써보자."),
+    ]
+    samples.forEach { container.mainContext.insert($0) }
+
+    return DiaryListScreen()
+        .modelContainer(container)
 }
