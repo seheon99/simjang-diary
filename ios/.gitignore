@@ -3,12 +3,8 @@
 **/*.xlsx
 **/*.csv
 **/*.mlpackage
-summer-homework-diary/Resources/kanana-1.5-2.1b-diary-100-4bit/
-**/config.json
-**/generation_config.json
-**/tokenizer.json
-**/tokenizer_config.json
-**/chat_template.jinja
+
+**/Resources/Models
 docs/**
 
 *.trace

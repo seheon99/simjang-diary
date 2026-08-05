@@ -21,7 +21,7 @@
 		76BB003130111B69008FB0D4 /* Exceptions for "summer-homework-diary" folder in "summer-homework-diary" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Resources/kanana-1.5-2.1b-lut4-ctx256.mlpackage",
+				"Resources/Models/kanana-1.5-2.1b-lut4-ctx256.mlpackage",
 			);
 			target = 76220EA4300B72FF008AB669 /* summer-homework-diary */;
 		};
@@ -34,7 +34,7 @@
 				76BB003130111B69008FB0D4 /* Exceptions for "summer-homework-diary" folder in "summer-homework-diary" target */,
 			);
 			explicitFolders = (
-				"Resources/kanana-1.5-2.1b-diary-100-4bit",
+				"Resources/Models/kanana-1.5-2.1b-diary-100-4bit",
 			);
 			path = "summer-homework-diary";
 			sourceTree = "<group>";

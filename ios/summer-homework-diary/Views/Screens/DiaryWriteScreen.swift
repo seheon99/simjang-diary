@@ -6,8 +6,9 @@
 import SwiftUI
 import SwiftData
 
-struct WriteView: View {
+struct DiaryWriteScreen: View {
     @Binding var path: NavigationPath
+    let date: Date
 
     @Environment(\.modelContext) private var modelContext
 
@@ -85,7 +86,7 @@ struct WriteView: View {
                 includeSystemPrompt: false
             )
 
-            let entry = DiaryEntry(date: .now, text: diary, feedback: feedback)
+            let entry = DiaryEntry(date: entryTimestamp(), text: diary, feedback: feedback)
             modelContext.insert(entry)
 
             userMessage = ""
@@ -99,10 +100,21 @@ struct WriteView: View {
             message = error.localizedDescription
         }
     }
+
+    private func entryTimestamp() -> Date {
+        let calendar = Calendar.current
+        let timeOfDay = calendar.dateComponents([.hour, .minute, .second], from: .now)
+        return calendar.date(
+            bySettingHour: timeOfDay.hour ?? 0,
+            minute: timeOfDay.minute ?? 0,
+            second: timeOfDay.second ?? 0,
+            of: calendar.startOfDay(for: date)
+        ) ?? date
+    }
 }
 
 #Preview {
     NavigationStack {
-        WriteView(path: .constant(NavigationPath()))
+        DiaryWriteScreen(path: .constant(NavigationPath()), date: .now)
     }
 }

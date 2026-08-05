@@ -12,7 +12,7 @@
 
 이를 위해 **직접 학습한 모델 2개**를 온디바이스로 탑재합니다:
 
-- **2B 코멘터**: [kanana-1.5-2.1b-instruct](https://huggingface.co/kakaocorp/kanana-1.5-2.1b-instruct-2505)를 QLoRA로 post-training 한 모델
+- **2B 코멘터**: [kanana-1.5-2.1b-instruct](https://huggingface.co/kakaocorp/kanana-1.5-2.1b-instruct-2505)를 QLoRA로 fine-tuning 한 모델
 - **100M 분류기**: 문장 단위 감정 및 위기 신호 감지하는 BERT 모델
 
 ## Roadmap
