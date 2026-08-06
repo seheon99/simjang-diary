@@ -7,9 +7,12 @@
 
 import Foundation
 import MLXHuggingFace
-import MLXLLM
 import MLXLMCommon
+import MLXLLM
+import MLX
 import Tokenizers
+
+import OSLog
 
 enum LLMEngineError: LocalizedError {
     case modelNotFound(String)
@@ -36,8 +39,15 @@ actor LLMEngine {
 
     private let model: ModelContainer
     private let systemPrompt: String
+    
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? "simjang",
+        category: "Performance"
+    )
 
     init(modelName: String) async throws {
+        Memory.cacheLimit = 2 * 1024 * 1024 // 2 MiB
+        
         self.modelName = modelName
 
         guard
@@ -62,10 +72,20 @@ actor LLMEngine {
             encoding: .utf8
         )
         .trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        logger.debug("Loading Start")
+        logger.debug("\(Memory.snapshot().description, privacy: .public)")
+
+        let loadStart = ContinuousClock.now
         model = try await LLMModelFactory.shared.loadContainer(
             from: modelURL,
             using: #huggingFaceTokenizerLoader()
         )
+        let loadEnd = ContinuousClock.now
+        let loadTime = loadEnd - loadStart
+
+        logger.debug("\(Memory.snapshot().description, privacy: .public)")
+        logger.debug("Loading End: \(loadTime.description, privacy: .public)")
     }
 
     func generate(
@@ -74,10 +94,13 @@ actor LLMEngine {
         age: Int,
         includeSystemPrompt: Bool = false
     ) async throws -> String {
+        logger.debug("Generation Start")
+        logger.debug("\(Memory.snapshot().description, privacy: .public)")
+        
         let session = ChatSession(
             model,
             instructions: includeSystemPrompt ? systemPrompt : nil,
-            generateParameters: .init(maxTokens: 100, temperature: 0)
+            generateParameters: .init(maxTokens: 1024, temperature: 0)
         )
         let payload = UserPayload(gender: gender, age: age, diary: diary)
         let message = String(
@@ -85,7 +108,17 @@ actor LLMEngine {
             as: UTF8.self
         )
 
-        return try await session.respond(to: message)
-            .trimmingCharacters(in: .whitespacesAndNewlines)
+        var text = ""
+        var info: GenerateCompletionInfo?
+        for try await generation in session.streamDetails(to: message) {
+            if let chunk = generation.chunk { text += chunk }
+            if let completion = generation.info { info = completion }
+        }
+        
+        logger.debug("\(info?.summary() ?? "no completion info", privacy: .public)")
+        logger.debug("\(Memory.snapshot().description, privacy: .public)")
+        logger.debug("Generation End")
+
+        return text.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
