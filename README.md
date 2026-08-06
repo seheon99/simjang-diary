@@ -1,12 +1,5 @@
 <p align="center">
   <img src="docs/assets/app-icon.svg">
-  <a href="https://apps.apple.com/kr/app/%EC%8B%AC%EC%9E%A5-%EB%A7%88%EC%9D%8C%EC%9D%98-%EC%9A%B4%EB%8F%99%EC%9E%A5/id6797366569?itscg=30200&itsct=apps_box_badge&mttnsubad=6797366569">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1785974400">
-      <source media="(prefers-color-scheme: light)" srcset="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/white/en-us?releaseDate=1785974400">
-      <img src="" alt="Download on the App Store" width="246px" height="82px" />
-    </picture>
-  </a>
 </p>
 
 # 심장, 마음의 운동장
@@ -33,7 +26,7 @@
 
 ## Open Source Contributions
 
-- LlamaConfig 파싱 후 유효성 체크 중 올바른 값을 에러로 표시하는 문제 해결: https://github.com/huggingface/transformers/pull/47707
+- LlamaConfig 유효성 체크 중 올바른 값을 에러로 표시하는 문제 해결: https://github.com/huggingface/transformers/pull/47707
 
 ## 기술 스택
 
@@ -105,4 +98,11 @@ Model A는 모범 답글 데이터로만 2차 학습을 했고, Model B는 분�
 
 - https://github.com/seheon99/mlx-swift-lm/blob/main/Libraries/MLXLLM/Models/Kanana2Tiny.swift
 
-하지만, [KANANA OPEN LICENSE AGREEMENT](https://huggingface.co/kakaocorp/kanana-2-1.3b-instruct/blob/main/LICENSE) 로 인해 서비스에 탑재하지 못했고, Kanana 1.5를 사용했습니다.
+
+<a href="https://apps.apple.com/kr/app/%EC%8B%AC%EC%9E%A5-%EB%A7%88%EC%9D%8C%EC%9D%98-%EC%9A%B4%EB%8F%99%EC%9E%A5/id6797366569?itscg=30200&itsct=apps_box_badge&mttnsubad=6797366569">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1785974400">
+    <source media="(prefers-color-scheme: light)" srcset="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/white/en-us?releaseDate=1785974400">
+    <img src="" alt="Download on the App Store" width="246px" height="82px" />
+  </picture>
+</a>
