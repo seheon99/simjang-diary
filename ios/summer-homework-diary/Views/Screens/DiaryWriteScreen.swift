@@ -6,6 +6,8 @@
 import SwiftUI
 import SwiftData
 
+import MLX
+
 struct DiaryWriteScreen: View {
     @Binding var path: NavigationPath
     let date: Date
@@ -78,13 +80,15 @@ struct DiaryWriteScreen: View {
         defer { isGenerating = false }
 
         do {
+            MLX.Memory.cacheLimit = 20 * 1024 * 1024
             let engine = try await LLMEngine(modelName: modelName)
             let feedback = try await engine.generate(
                 diary: diary,
                 gender: "남",
                 age: 28,
-                includeSystemPrompt: false
+                includeSystemPrompt: true
             )
+            MLX.Memory.clearCache()
 
             let entry = DiaryEntry(date: entryTimestamp(), text: diary, feedback: feedback)
             modelContext.insert(entry)
