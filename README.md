@@ -20,7 +20,7 @@
 
 ## 주요 문제 해결
 
-- https://github.com/seheon99/simjang-diary/pull/6#issue-5072363912
+- https://github.com/seheon99/simjang-diary/pull/6
 
 ## 기술 스택
 
