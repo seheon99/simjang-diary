@@ -18,9 +18,10 @@ struct DiaryWriteScreen: View {
     @State private var message = ""
     @State private var isGenerating = false
     @State private var hasDisappeared = false
+    @State private var enableSystemPrompt = true
     @FocusState private var isTextFieldFocused: Bool
 
-    private let modelName = "kanana-1.5-2.1b-diary-100-4bit"
+    private let modelName = "kanana-1.5-2.1b-instruct-mlx-int4"
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -44,7 +45,11 @@ struct DiaryWriteScreen: View {
             .textFieldStyle(.roundedBorder)
 
             Spacer()
-
+            
+            #if DEBUG
+            Toggle("시스템 프롬프트", isOn: $enableSystemPrompt)
+            #endif
+            
             Button {
                 Task { await submit() }
             } label: {
@@ -80,17 +85,18 @@ struct DiaryWriteScreen: View {
         defer { isGenerating = false }
 
         do {
-            MLX.Memory.cacheLimit = 20 * 1024 * 1024
-            let engine = try await LLMEngine(modelName: modelName)
-            let feedback = try await engine.generate(
+            var engine: LLMEngine!
+            var result: String
+
+            engine = try await LLMEngine(modelName: modelName)
+            result = try await engine.generate(
                 diary: diary,
                 gender: "남",
                 age: 28,
-                includeSystemPrompt: true
+                includeSystemPrompt: enableSystemPrompt
             )
-            MLX.Memory.clearCache()
 
-            let entry = DiaryEntry(date: entryTimestamp(), text: diary, feedback: feedback)
+            let entry = DiaryEntry(date: entryTimestamp(), text: diary, feedback: result)
             modelContext.insert(entry)
 
             userMessage = ""
