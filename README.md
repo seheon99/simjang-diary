@@ -22,6 +22,10 @@
 
 - MLX 캐시 메모리 관리: https://github.com/seheon99/simjang-diary/pull/6
 
+## Open Source Contributions
+
+- LlamaConfig 파싱 후 유효성 체크 중 올바른 값을 에러로 표시하는 문제 해결: https://github.com/huggingface/transformers/pull/47707
+
 ## 기술 스택
 
 | 분야 | 기술                              |
