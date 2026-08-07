@@ -2,9 +2,24 @@
   <img src="docs/assets/app-icon.svg">
 </p>
 
-# 심장, 마음의 운동장
+<h1 align="center">심장</h1>
 
-선생님의 따듯한 관심과 애정의 추억을 불러오는 일기장. 심장
+<p align="center">
+  <strong>마음의 운동장</strong><br>
+  선생님의 따듯한 관심과 애정이 담긴 한 줄의 추억을 불러오는 일기장. 심장
+</p>
+
+<p align="center">
+  <a href="#주요-기능"><strong>주요 기능</strong></a> .
+  <a href="#문제-해결"><strong>문제 해결</strong></a> .
+  <a href="#기술 스택"><strong>기술 스택</strong></a>
+</p>
+
+<p align="center">
+  <img alt="GitHub License" src="https://img.shields.io/github/license/seheon99/simjang-diary">
+</p>
+
+---
 
 ## 주요 기능
 
@@ -12,15 +27,15 @@
 
 일기에 나타나는 감정을 알아차려주고, 이해하고, 생각의 방향을 잡아주는 답글을 작성합니다.
 
-**온디바이스 언어 모델**
-
-합성데이터로 파인튜닝된 소형 언어 모델을 기기 내부에서 담아 사용자의 일기를 서버로 전송하지 않고 답글을 작성합니다.
-
 **감정 달력**
 
 달력에 그 날의 감정을 붙여 한 달 동안 감정의 추이를 확인할 수 있습니다.
 
-## 주요 문제 해결
+**온디바이스 언어 모델**
+
+파인튜닝된 소형 언어 모델을 기기 내부에서 담아 사용자의 일기를 서버로 전송하지 않고 답글을 작성합니다.
+
+## 문제 해결
 
 - MLX 캐시 메모리 관리: https://github.com/seheon99/simjang-diary/pull/6
 
