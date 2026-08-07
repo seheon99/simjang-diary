@@ -12,7 +12,7 @@
 <p align="center">
   <a href="#주요-기능"><strong>주요 기능</strong></a> .
   <a href="#문제-해결"><strong>문제 해결</strong></a> .
-  <a href="#기술 스택"><strong>기술 스택</strong></a>
+  <a href="#기술-스택"><strong>기술 스택</strong></a>
 </p>
 
 <p align="center">
