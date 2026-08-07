@@ -5,6 +5,7 @@
 **/*.mlpackage
 
 **/Models/**
+**/Prompts/**
 docs/**
 
 *.trace
