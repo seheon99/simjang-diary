@@ -15,56 +15,60 @@ struct DiaryListScreen: View {
     @Query(sort: \DiaryEntry.date, order: .reverse) private var entries: [DiaryEntry]
     @State private var path = NavigationPath()
     @State private var selectedDate = Calendar.current.startOfDay(for: .now)
-
+    
     private var entriesByDay: [Date: [DiaryEntry]] {
         Dictionary(grouping: entries) { Calendar.current.startOfDay(for: $0.date) }
     }
-
+    
     var body: some View {
         NavigationStack(path: $path) {
-            VStack(spacing: 0) {
-                DiaryCalendarView(entriesByDay: entriesByDay, selectedDate: $selectedDate)
-
-                let dayEntries = entriesByDay[selectedDate] ?? []
-                if dayEntries.isEmpty {
-                    ContentUnavailableView(
-                        "이 날짜엔 쓴 일기가 없어요",
-                        systemImage: "book.closed"
-                    )
-                } else {
-                    List(dayEntries) { entry in
-                        NavigationLink(value: DiaryRoute.detail(entry)) {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(entry.date, style: .time)
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                                Text(entry.text)
-                                    .font(.body)
-                                    .lineLimit(1)
+            AppLayout {
+                VStack(spacing: 0) {
+                    DiaryCalendarView(entriesByDay: entriesByDay, selectedDate: $selectedDate)
+                    
+                    let dayEntries = entriesByDay[selectedDate] ?? []
+                    if dayEntries.isEmpty {
+                        ContentUnavailableView {
+                            Label("일기가 없어요", systemImage: "book.closed")
+                                .font(.custom("MaruBuri-Bold", size: 24))
+                        }
+                    } else {
+                        List(dayEntries) { entry in
+                            NavigationLink(value: DiaryRoute.detail(entry)) {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(entry.date, style: .time)
+                                        .foregroundStyle(.secondary)
+                                    Text(entry.text)
+                                        .lineLimit(1)
+                                }
                             }
+                            .listRowBackground(Color.taupe50)
+                        }
+                        .scrollContentBackground(.hidden)
+                    }
+                }
+                .navigationDestination(for: DiaryRoute.self) { route in
+                    AppLayout {
+                        switch route {
+                        case .write(let date):
+                            DiaryWriteScreen(path: $path, date: date)
+                        case .detail(let entry):
+                            DiaryDetailScreen(entry: entry)
                         }
                     }
                 }
-            }
-            .navigationDestination(for: DiaryRoute.self) { route in
-                switch route {
-                case .write(let date):
-                    DiaryWriteScreen(path: $path, date: date)
-                case .detail(let entry):
-                    DiaryDetailScreen(entry: entry)
+                .overlay(alignment: .bottomTrailing) {
+                    Button {
+                        path.append(DiaryRoute.write(selectedDate))
+                    } label: {
+                        Image(systemName: "plus")
+                            .font(.system(size: 16, weight: .semibold))
+                            .frame(width: 36, height: 36)
+                    }
+                    .buttonStyle(.glassProminent)
+                    .clipShape(Circle())
+                    .padding(24)
                 }
-            }
-            .overlay(alignment: .bottomTrailing) {
-                Button {
-                    path.append(DiaryRoute.write(selectedDate))
-                } label: {
-                    Image(systemName: "plus")
-                        .font(.system(size: 16, weight: .semibold))
-                        .frame(width: 36, height: 36)
-                }
-                .buttonStyle(.glassProminent)
-                .clipShape(Circle())
-                .padding(24)
             }
         }
     }
@@ -86,7 +90,7 @@ struct DiaryListScreen: View {
         DiaryEntry(date: calendar.date(byAdding: .day, value: -3, to: today)!, text: "책을 읽고 독서록을 썼다.", feedback: "다음엔 더 자세히 써보자."),
     ]
     samples.forEach { container.mainContext.insert($0) }
-
+    
     return DiaryListScreen()
         .modelContainer(container)
 }
