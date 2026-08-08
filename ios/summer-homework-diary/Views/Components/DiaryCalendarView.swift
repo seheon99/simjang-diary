@@ -16,7 +16,7 @@ struct DiaryCalendarView: UIViewRepresentable {
         let gregorianCalendar = Calendar(identifier: .gregorian)
 
         calendarView.calendar = gregorianCalendar
-        calendarView.locale = Locale(identifier: "ko_KR")
+        calendarView.locale = Locale(identifier: "en_US")
         calendarView.fontDesign = .serif
         calendarView.availableDateRange = DateInterval(
             start: .distantPast,
