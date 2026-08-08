@@ -18,10 +18,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		76BB003130111B69008FB0D4 /* Exceptions for "summer-homework-diary" folder in "summer-homework-diary" target */ = {
+		76439E2C30259B1100BF4FC3 /* Exceptions for "summer-homework-diary" folder in "summer-homework-diary" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Resources/Models/kanana-1.5-2.1b-lut4-ctx256.mlpackage",
+				"Resources/Models/kanana-1.5-2.1b-diary-mlx-int4",
 			);
 			target = 76220EA4300B72FF008AB669 /* summer-homework-diary */;
 		};
@@ -31,10 +31,11 @@
 		76220EA7300B72FF008AB669 /* summer-homework-diary */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				76BB003130111B69008FB0D4 /* Exceptions for "summer-homework-diary" folder in "summer-homework-diary" target */,
+				76439E2C30259B1100BF4FC3 /* Exceptions for "summer-homework-diary" folder in "summer-homework-diary" target */,
 			);
 			explicitFolders = (
-				"Resources/Models/kanana-1.5-2.1b-diary-100-4bit",
+				"Resources/Models/kanana-1.5-2.1b-diary-mlx-int4",
+				"Resources/Models/kanana-1.5-2.1b-instruct-mlx-int4",
 			);
 			path = "summer-homework-diary";
 			sourceTree = "<group>";
@@ -286,7 +287,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = U75XF8PBP6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -302,7 +303,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.seheon.summer-homework-diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -324,7 +325,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = U75XF8PBP6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -340,7 +341,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.seheon.summer-homework-diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
