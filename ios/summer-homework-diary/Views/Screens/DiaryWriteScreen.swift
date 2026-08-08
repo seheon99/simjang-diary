@@ -8,6 +8,8 @@ import SwiftData
 
 import MLX
 
+import OSLog
+
 struct DiaryWriteScreen: View {
     @Binding var path: NavigationPath
     let date: Date
@@ -15,7 +17,6 @@ struct DiaryWriteScreen: View {
     @Environment(\.modelContext) private var modelContext
 
     @State private var userMessage = ""
-    @State private var message = ""
     @State private var isGenerating = false
     @State private var hasDisappeared = false
     @State private var enableSystemPrompt = true
@@ -23,17 +24,13 @@ struct DiaryWriteScreen: View {
 
     private let modelName = "kanana-1.5-2.1b-instruct-mlx-int4"
 
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? "simjang",
+        category: "Performance"
+    )
+
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("오늘의 일기").font(.title)
-
-            if !message.isEmpty {
-                Text(message)
-                    .font(.headline)
-                    .foregroundStyle(Color.red)
-                    .monospaced(true)
-            }
-
             TextField(
                 "오늘 있었던 일을 적어보세요",
                 text: $userMessage,
@@ -68,7 +65,6 @@ struct DiaryWriteScreen: View {
             )
         }
         .padding()
-        .navigationTitle("일기 작성")
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear {
             hasDisappeared = true
@@ -81,7 +77,6 @@ struct DiaryWriteScreen: View {
         guard !diary.isEmpty else { return }
 
         isGenerating = true
-        message = ""
         defer { isGenerating = false }
 
         do {
@@ -107,7 +102,7 @@ struct DiaryWriteScreen: View {
                 path.append(DiaryRoute.detail(entry))
             }
         } catch {
-            message = error.localizedDescription
+            logger.error("\(error.localizedDescription, privacy: .public)")
         }
     }
 
