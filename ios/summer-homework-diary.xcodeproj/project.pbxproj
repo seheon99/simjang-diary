@@ -21,6 +21,7 @@
 		76439E2C30259B1100BF4FC3 /* Exceptions for "summer-homework-diary" folder in "summer-homework-diary" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Info.plist,
 				"Resources/Models/kanana-1.5-2.1b-diary-mlx-int4",
 			);
 			target = 76220EA4300B72FF008AB669 /* summer-homework-diary */;
@@ -291,6 +292,7 @@
 				DEVELOPMENT_TEAM = U75XF8PBP6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "summer-homework-diary/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "심장";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -329,6 +331,7 @@
 				DEVELOPMENT_TEAM = U75XF8PBP6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "summer-homework-diary/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "심장";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
