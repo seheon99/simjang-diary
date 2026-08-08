@@ -12,4 +12,16 @@ extension Color {
     static let taupe800 = Color(.sRGB, red: 0.168641792, green: 0.141818078, blue: 0.134151739)
     static let taupe900 = Color(.sRGB, red: 0.113655549, green: 0.093880630, blue: 0.085957216)
     static let taupe950 = Color(.sRGB, red: 0.046956695, green: 0.039357738, blue: 0.035540755)
+
+    static let neutral50 = Color(white: 0.980255980)
+    static let neutral100 = Color(white: 0.960586987)
+    static let neutral200 = Color(white: 0.898160664)
+    static let neutral300 = Color(white: 0.831444450)
+    static let neutral400 = Color(white: 0.630163204)
+    static let neutral500 = Color(white: 0.451519243)
+    static let neutral600 = Color(white: 0.321992847)
+    static let neutral700 = Color(white: 0.250470902)
+    static let neutral800 = Color(white: 0.149382078)
+    static let neutral900 = Color(white: 0.090527405)
+    static let neutral950 = Color(white: 0.039388235)
 }
