@@ -30,9 +30,11 @@ enum LLMEngineError: LocalizedError {
 
 actor LLMEngine {
     private struct UserPayload: Encodable {
-        let gender: String
-        let age: Int
-        let diary: String
+        let date: Date
+        let text: String
+        let weather: Weather?
+        let valence: Valence
+        let emotions: [Emotion]
     }
 
     nonisolated let modelName: String
@@ -90,9 +92,7 @@ actor LLMEngine {
     }
 
     func generate(
-        diary: String,
-        gender: String,
-        age: Int,
+        diary: DiaryEntry,
         includeSystemPrompt: Bool = false
     ) async throws -> String {
         logger.debug("Generation Start")
@@ -103,7 +103,13 @@ actor LLMEngine {
             instructions: includeSystemPrompt ? systemPrompt : nil,
             generateParameters: .init(maxTokens: 1024, temperature: 0)
         )
-        let payload = UserPayload(gender: gender, age: age, diary: diary)
+        let payload = UserPayload(
+            date: diary.date,
+            text: diary.text,
+            weather: diary.weather,
+            valence: diary.valence,
+            emotions: diary.emotions
+        )
         let message = String(
             decoding: try JSONEncoder().encode(payload),
             as: UTF8.self

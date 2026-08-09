@@ -250,25 +250,23 @@ struct DiaryWriteScreen: View {
         defer { isGenerating = false }
 
         do {
-            var engine: LLMEngine!
-            var result: String
-
-            engine = try await LLMEngine(modelName: modelName)
-            result = try await engine.generate(
-                diary: diary,
-                gender: "남",
-                age: 28,
-                includeSystemPrompt: enableSystemPrompt
-            )
-
             let entry = DiaryEntry(
                 date: entryTimestamp(),
                 text: diary,
                 weather: selectedWeather,
                 valence: valence,
-                emotions: Emotion.allCases.filter(selectedEmotions.contains),
-                feedback: result
+                emotions: Emotion.allCases.filter(selectedEmotions.contains)
             )
+            var engine: LLMEngine!
+            var result: String
+
+            engine = try await LLMEngine(modelName: modelName)
+            result = try await engine.generate(
+                diary: entry,
+                includeSystemPrompt: enableSystemPrompt
+            )
+
+            entry.feedback = result
             modelContext.insert(entry)
 
             userMessage = ""
