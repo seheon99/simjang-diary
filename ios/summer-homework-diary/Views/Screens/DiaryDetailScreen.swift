@@ -12,25 +12,23 @@ struct DiaryDetailScreen: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 Text(entry.date, style: .date)
-                    .font(.caption)
+                    .font(.diaryCaption)
                     .foregroundStyle(.secondary)
 
                 Text(entry.text)
-                    .font(.body)
+                    .font(.diaryBody)
 
                 Divider()
 
                 Text("피드백")
-                    .font(.headline)
+                    .font(.diaryCaption)
 
                 Text(entry.feedback ?? "")
-                    .font(.body)
+                    .font(.diaryComment)
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .navigationTitle("일기")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
