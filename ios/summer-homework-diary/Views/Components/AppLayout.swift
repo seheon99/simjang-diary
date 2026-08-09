@@ -12,7 +12,8 @@ struct AppLayout<Content: View>: View {
             Color.taupe100.ignoresSafeArea()
             content
         }
-        .font(.custom("MaruBuri-Regular", size: 16))
+        .font(.diaryRegular)
         .foregroundStyle(Color.neutral950)
+        .statusBarHidden(true)
     }
 }

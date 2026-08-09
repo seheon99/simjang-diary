@@ -29,6 +29,7 @@ struct DiaryDetailScreen: View {
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .statusBarHidden(true)
     }
 }
 

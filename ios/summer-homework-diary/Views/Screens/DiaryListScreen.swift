@@ -40,6 +40,7 @@ struct DiaryListScreen: View {
                                         .foregroundStyle(.secondary)
                                     Text(entry.text)
                                         .lineLimit(1)
+                                        .font(.diaryBody)
                                 }
                             }
                             .listRowBackground(Color.taupe50)
@@ -69,6 +70,7 @@ struct DiaryListScreen: View {
                     .buttonStyle(.glassProminent)
                     .clipShape(Circle())
                     .padding(24)
+                    .tint(.taupe700)
                 }
             }
         }

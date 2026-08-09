@@ -16,13 +16,13 @@ enum Valence: Int, Codable {
 
     var displayName: String {
         switch self {
-        case .veryUnpleasant: "매우 불쾌해요"
-        case .unpleasant: "불쾌해요"
-        case .slightlyUnpleasant: "조금 불쾌해요"
-        case .neutral: "보통이에요"
-        case .slightlyPleasant: "조금 좋아요"
-        case .pleasant: "좋아요"
-        case .veryPleasant: "매우 좋아요"
+        case .veryUnpleasant: "아주 불쾌함"
+        case .unpleasant: "불쾌함"
+        case .slightlyUnpleasant: "약간 불쾌함"
+        case .neutral: "보통"
+        case .slightlyPleasant: "약간 기분 좋음"
+        case .pleasant: "기분 좋음"
+        case .veryPleasant: "아주 기분 좋음"
         }
     }
 

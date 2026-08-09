@@ -48,7 +48,10 @@ struct DiaryWriteScreen: View {
 
     var body: some View {
         content
+            .id(step)
+            .transition(.opacity)
             .padding()
+            .animation(.easeInOut(duration: 0.2), value: step)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(step != .weather)
             .toolbar {
@@ -72,6 +75,7 @@ struct DiaryWriteScreen: View {
             .onDisappear {
                 hasDisappeared = true
             }
+            .statusBarHidden(true)
     }
 
     @ViewBuilder
@@ -85,54 +89,54 @@ struct DiaryWriteScreen: View {
     }
 
     private var weatherStep: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("오늘 날씨는 어땠나요?")
+        VStack(alignment: .leading, spacing: 60) {
+            Spacer()
+            Text("오늘의 하늘을 떠올려보세요")
                 .font(.diaryTitle)
-
             HStack(spacing: 4) {
                 ForEach(Weather.allCases) { weather in
                     Button {
                         selectedWeather = selectedWeather == weather ? nil : weather
+                        step = .valence
                     } label: {
-                        Label(weather.displayName, image: weather.iconName)
-                            .font(.diaryCaption)
+                        Image(weather.iconName)
+                            .renderingMode(.template)
+                            .foregroundStyle(selectedWeather == weather ? Color.neutral50 : Color.neutral950)
                             .frame(maxWidth: .infinity, minHeight: 44)
+                            .accessibilityLabel(weather.displayName)
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(selectedWeather == weather ? .taupe700 : .taupe300)
+                    .animation(
+                        .easeInOut(duration: 0.2),
+                        value: selectedWeather == weather
+                    )
                     .accessibilityAddTraits(
                         selectedWeather == weather ? .isSelected : []
                     )
                 }
             }
-
             Spacer()
-
-            Button("다음") {
-                step = .valence
-            }
-            .buttonStyle(.glassProminent)
-            .buttonSizing(.flexible)
         }
     }
 
     private var valenceStep: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("오늘 기분은 어땠나요?")
+        VStack(alignment: .leading, spacing: 60) {
+            Spacer()
+            Text("오늘의 마음은 어떤가요?")
                 .font(.diaryTitle)
 
             Text(valence.displayName)
                 .font(.diaryHeadline)
+                .frame(maxWidth: .infinity, alignment: .center)
 
             Slider(value: $valenceValue, in: -3...3) {
                 Text("오늘의 기분")
             } minimumValueLabel: {
-                Text("-3")
+                Text("불쾌")
             } maximumValueLabel: {
-                Text("3")
-            }
-            .accessibilityValue(valence.displayName)
-
+                Text("상쾌")
+            }.tint(.taupe700)
             Spacer()
 
             Button("다음") {
@@ -140,6 +144,9 @@ struct DiaryWriteScreen: View {
             }
             .buttonStyle(.glassProminent)
             .buttonSizing(.flexible)
+            .controlSize(.large)
+            .tint(.taupe700)
+            .foregroundStyle(Color.neutral50)
         }
     }
 
@@ -148,13 +155,16 @@ struct DiaryWriteScreen: View {
 
         return ScrollView {
             VStack(alignment: .leading, spacing: 20) {
+                Text(valence.displayName)
+                    .font(.diaryHeadline)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                
+                Spacer()
+                
                 Text("어떤 감정을 느꼈나요?")
                     .font(.diaryTitle)
 
-                LazyVGrid(
-                    columns: [GridItem(.adaptive(minimum: 88), spacing: 8)],
-                    spacing: 8
-                ) {
+                FlowLayout(spacing: 8) {
                     ForEach(matchingEmotions) { emotion in
                         emotionButton(emotion)
                     }
@@ -174,6 +184,8 @@ struct DiaryWriteScreen: View {
                     Button("더 보기") {
                         showsAllEmotions = true
                     }
+                        .tint(.taupe700)
+                        .font(.diaryCaption)
                 }
 
                 Button("다음") {
@@ -182,6 +194,10 @@ struct DiaryWriteScreen: View {
                 .buttonStyle(.glassProminent)
                 .buttonSizing(.flexible)
                 .disabled(selectedEmotions.isEmpty)
+                .controlSize(.large)
+                .tint(.taupe700)
+                .font(.diaryRegular)
+                .foregroundStyle(Color.neutral50)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -194,10 +210,13 @@ struct DiaryWriteScreen: View {
             selectedEmotions.formSymmetricDifference([emotion])
         } label: {
             Text(emotion.displayName)
-                .frame(maxWidth: .infinity, minHeight: 44)
+                .font(.diaryHeadline.pointSize(13))
+                .foregroundStyle(isSelected ? Color.neutral50 : Color.neutral950)
         }
         .buttonStyle(.borderedProminent)
+        .buttonSizing(.fitted)
         .tint(isSelected ? .taupe700 : .taupe300)
+        .animation(.easeInOut(duration: 0.2), value: isSelected)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
@@ -211,7 +230,9 @@ struct DiaryWriteScreen: View {
             .lineLimit(5...20)
             .focused($isTextFieldFocused)
             .frame(maxWidth: .infinity, alignment: .leading)
+            .border(.clear)
             .textFieldStyle(.roundedBorder)
+            .font(.diaryBody)
 
             Spacer()
 
@@ -228,6 +249,7 @@ struct DiaryWriteScreen: View {
                     Label("제출", systemImage: "paperplane")
                         .controlSize(.large)
                         .padding(.vertical, 6)
+                        .font(.diaryRegular)
                 }
             }
             .buttonStyle(.glassProminent)
@@ -238,6 +260,8 @@ struct DiaryWriteScreen: View {
                         in: .whitespacesAndNewlines
                     ).isEmpty
             )
+            .tint(.taupe700)
+            .foregroundStyle(Color.neutral50)
         }
     }
 

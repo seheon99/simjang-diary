@@ -13,28 +13,34 @@ extension Font {
         size: 28,
         relativeTo: .title
     )
-
+    
     static let diaryHeadline = Font.custom(
         "MaruBuri-SemiBold",
         size: 18,
         relativeTo: .headline
     )
-
+    
     static let diaryBody = Font.custom(
         "NanumBaReunHiPi",
-        size: 17,
+        size: 24,
         relativeTo: .body
     )
     
     static let diaryComment = Font.custom(
         "NanumSeongSirCe",
-        size: 17,
+        size: 24,
         relativeTo: .body
     )
-
+    
     static let diaryCaption = Font.custom(
         "MaruBuri-Light",
         size: 13,
         relativeTo: .caption
+    )
+    
+    static let diaryRegular = Font.custom(
+        "MaruBuri-Regular",
+        size: 17,
+        relativeTo: .body
     )
 }

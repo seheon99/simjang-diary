@@ -24,6 +24,7 @@ struct DiaryCalendarView: UIViewRepresentable {
         )
         calendarView.delegate = context.coordinator
         calendarView.selectionBehavior = UICalendarSelectionSingleDate(delegate: context.coordinator)
+        calendarView.tintColor = UIColor(Color.taupe700)
 
         return calendarView
     }
