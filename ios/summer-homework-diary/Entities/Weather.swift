@@ -5,14 +5,16 @@
 //  Created by 유세헌 on 8/9/26.
 //
 
-enum Weather: String, Codable {
+enum Weather: String, Codable, CaseIterable, Identifiable {
     case sunny
     case cloudy
     case overcast
     case rainy
     case thunderstorm
     case snowy
-    
+
+    var id: Self { self }
+
     var displayName: String {
         switch self {
         case .sunny: "맑음"
