@@ -46,6 +46,7 @@ actor LLMEngine {
     )
 
     init(modelName: String) async throws {
+        Memory.memoryLimit = 2 * 1024 * 1024 * 1024 // 2 GiB
         Memory.cacheLimit = 2 * 1024 * 1024 // 2 MiB
         
         self.modelName = modelName
