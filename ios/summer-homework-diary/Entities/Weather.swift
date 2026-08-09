@@ -25,4 +25,15 @@ enum Weather: String, Codable, CaseIterable, Identifiable {
         case .snowy: "눈"
         }
     }
+
+    var iconName: String {
+        switch self {
+        case .sunny: "weather-sun"
+        case .cloudy: "weather-cloud-sun"
+        case .overcast: "weather-cloudy"
+        case .rainy: "weather-rain"
+        case .thunderstorm: "weather-lightning"
+        case .snowy: "weather-snow"
+        }
+    }
 }

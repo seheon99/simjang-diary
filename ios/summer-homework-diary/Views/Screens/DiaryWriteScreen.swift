@@ -94,7 +94,7 @@ struct DiaryWriteScreen: View {
                     Button {
                         selectedWeather = selectedWeather == weather ? nil : weather
                     } label: {
-                        Text(weather.displayName)
+                        Label(weather.displayName, image: weather.iconName)
                             .font(.diaryCaption)
                             .frame(maxWidth: .infinity, minHeight: 44)
                     }
