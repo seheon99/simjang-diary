@@ -64,6 +64,7 @@ struct DiaryListScreen: View {
                         Image(systemName: "plus")
                             .font(.system(size: 16, weight: .semibold))
                             .frame(width: 36, height: 36)
+                            .foregroundStyle(Color.neutral50)
                     }
                     .buttonStyle(.glassProminent)
                     .clipShape(Circle())
