@@ -21,13 +21,13 @@ extension Font {
     )
     
     static let diaryBody = Font.custom(
-        "NanumBaReunHiPi",
+        "MaruBuri-Regular",
         size: 24,
         relativeTo: .body
     )
     
     static let diaryComment = Font.custom(
-        "NanumSeongSirCe",
+        "MaruBuri-Regular",
         size: 24,
         relativeTo: .body
     )
