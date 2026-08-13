@@ -39,7 +39,7 @@ struct DiaryWriteScreen: View {
         Valence(rawValue: Int(valenceValue.rounded())) ?? .neutral
     }
 
-    private let modelName = "kanana-1.5-2.1b-instruct-mlx-int4"
+    private let feedbackService = DiaryFeedbackService()
 
     private let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "simjang",
@@ -281,12 +281,8 @@ struct DiaryWriteScreen: View {
                 valence: valence,
                 emotions: Emotion.allCases.filter(selectedEmotions.contains)
             )
-            var engine: LLMEngine!
-            var result: String
-
-            engine = try await LLMEngine(modelName: modelName)
-            result = try await engine.generate(
-                diary: entry,
+            let result = try await feedbackService.generate(
+                for: entry,
                 includeSystemPrompt: enableSystemPrompt
             )
 
