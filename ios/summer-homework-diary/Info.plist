@@ -4,8 +4,6 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>NanumSeongSirCe.ttf</string>
-		<string>NanumBaReunHiPi.ttf</string>
 		<string>MaruBuri-Bold.ttf</string>
 		<string>MaruBuri-ExtraLight.ttf</string>
 		<string>MaruBuri-Light.ttf</string>
