@@ -281,13 +281,16 @@ struct DiaryWriteScreen: View {
                 valence: valence,
                 emotions: Emotion.allCases.filter(selectedEmotions.contains)
             )
+            modelContext.insert(entry)
+            try modelContext.save()
+
             let result = try await feedbackService.generate(
                 for: entry,
                 includeSystemPrompt: enableSystemPrompt
             )
 
             entry.feedback = result
-            modelContext.insert(entry)
+            try modelContext.save()
 
             userMessage = ""
             isTextFieldFocused = false
