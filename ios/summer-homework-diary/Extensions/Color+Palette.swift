@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 extension Color {
     static let taupe50 = Color(.sRGB, red: 0.985423913, green: 0.980824680, blue: 0.976225294)
@@ -24,4 +25,28 @@ extension Color {
     static let neutral800 = Color(white: 0.149382078)
     static let neutral900 = Color(white: 0.090527405)
     static let neutral950 = Color(white: 0.039388235)
+}
+
+extension UIColor {
+    /// Accent tint used directly by UIKit components (e.g. `UICalendarView.tintColor`),
+    /// kept as the source of truth so it stays trait-adaptive — converting a resolved
+    /// `Color` to `UIColor` after the fact isn't guaranteed to preserve that.
+    static let taupeAccent = UIColor { $0.userInterfaceStyle == .dark ? UIColor(Color.taupe300) : UIColor(Color.taupe700) }
+}
+
+private func adaptiveColor(light: Color, dark: Color) -> Color {
+    Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light) })
+}
+
+extension Color {
+    /// Screen background / default text, used by `AppLayout` for every screen.
+    static let appBackground = adaptiveColor(light: taupe100, dark: taupe900)
+    static let appForeground = adaptiveColor(light: neutral950, dark: neutral50)
+    /// Elevated surface (e.g. list rows) — a step lighter than `appBackground` in both modes.
+    static let rowBackground = adaptiveColor(light: taupe50, dark: taupe800)
+    /// Selected-state pill fill and the muted, unselected counterpart.
+    static let accent = Color(uiColor: .taupeAccent)
+    static let accentMuted = adaptiveColor(light: taupe300, dark: taupe700)
+    /// Text placed on top of `accent`.
+    static let accentForeground = adaptiveColor(light: neutral50, dark: neutral950)
 }

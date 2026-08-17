@@ -101,12 +101,12 @@ struct DiaryWriteScreen: View {
                     } label: {
                         Image(weather.iconName)
                             .renderingMode(.template)
-                            .foregroundStyle(selectedWeather == weather ? Color.neutral50 : Color.neutral950)
+                            .foregroundStyle(selectedWeather == weather ? Color.accentForeground : Color.appForeground)
                             .frame(maxWidth: .infinity, minHeight: 44)
                             .accessibilityLabel(weather.displayName)
                     }
                     .buttonStyle(.borderedProminent)
-                    .tint(selectedWeather == weather ? .taupe700 : .taupe300)
+                    .tint(selectedWeather == weather ? .accent : .accentMuted)
                     .animation(
                         .easeInOut(duration: 0.2),
                         value: selectedWeather == weather
@@ -136,7 +136,7 @@ struct DiaryWriteScreen: View {
                 Text("불쾌")
             } maximumValueLabel: {
                 Text("상쾌")
-            }.tint(.taupe700)
+            }.tint(.accent)
             Spacer()
 
             Button("다음") {
@@ -184,7 +184,7 @@ struct DiaryWriteScreen: View {
                     Button("더 보기") {
                         showsAllEmotions = true
                     }
-                        .tint(.taupe700)
+                        .tint(.accent)
                         .font(.diaryCaption)
                 }
 
@@ -211,11 +211,11 @@ struct DiaryWriteScreen: View {
         } label: {
             Text(emotion.displayName)
                 .font(.diaryHeadline.pointSize(13))
-                .foregroundStyle(isSelected ? Color.neutral50 : Color.neutral950)
+                .foregroundStyle(isSelected ? Color.accentForeground : Color.appForeground)
         }
         .buttonStyle(.borderedProminent)
         .buttonSizing(.fitted)
-        .tint(isSelected ? .taupe700 : .taupe300)
+        .tint(isSelected ? .accent : .accentMuted)
         .animation(.easeInOut(duration: 0.2), value: isSelected)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }

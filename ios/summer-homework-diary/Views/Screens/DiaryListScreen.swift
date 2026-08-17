@@ -43,7 +43,7 @@ struct DiaryListScreen: View {
                                         .font(.diaryBody)
                                 }
                             }
-                            .listRowBackground(Color.taupe50)
+                            .listRowBackground(Color.rowBackground)
                         }
                         .scrollContentBackground(.hidden)
                     }
