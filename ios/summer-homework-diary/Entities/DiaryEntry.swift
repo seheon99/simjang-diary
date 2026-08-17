@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import NaturalLanguage
 import SwiftData
 
 @Model
@@ -31,5 +32,16 @@ final class DiaryEntry {
         self.valence = valence
         self.emotions = emotions
         self.feedback = feedback
+    }
+
+    var firstSentence: String {
+        let tokenizer = NLTokenizer(unit: .sentence)
+        tokenizer.string = text
+        var sentence = text
+        tokenizer.enumerateTokens(in: text.startIndex..<text.endIndex) { range, _ in
+            sentence = String(text[range]).trimmingCharacters(in: .whitespacesAndNewlines)
+            return false
+        }
+        return sentence
     }
 }

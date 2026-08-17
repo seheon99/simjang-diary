@@ -38,9 +38,9 @@ struct DiaryListScreen: View {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(entry.date, style: .time)
                                         .foregroundStyle(.secondary)
-                                    Text(entry.text)
-                                        .lineLimit(1)
-                                        .font(.diaryBody)
+                                    Text(entry.firstSentence)
+                                        .lineLimit(2)
+                                        .font(.custom("MaruBuri-Regular", size: 16, relativeTo: .footnote))
                                 }
                             }
                             .listRowBackground(Color.rowBackground)
