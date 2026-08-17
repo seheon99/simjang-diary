@@ -9,11 +9,11 @@ struct AppLayout<Content: View>: View {
 
     var body: some View {
         ZStack {
-            Color.taupe100.ignoresSafeArea()
+            Color.appBackground.ignoresSafeArea()
             content
         }
         .font(.diaryRegular)
-        .foregroundStyle(Color.neutral950)
+        .foregroundStyle(Color.appForeground)
         .statusBarHidden(true)
     }
 }
