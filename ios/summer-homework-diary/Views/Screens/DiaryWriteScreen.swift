@@ -222,19 +222,25 @@ struct DiaryWriteScreen: View {
 
     private var diaryStep: some View {
         VStack(alignment: .leading, spacing: 20) {
-            TextField(
-                "오늘 있었던 일을 적어보세요",
-                text: $userMessage,
-                axis: .vertical
-            )
-            .lineLimit(5...20)
-            .focused($isTextFieldFocused)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .border(.clear)
-            .textFieldStyle(.roundedBorder)
+            ZStack(alignment: .topLeading) {
+                if userMessage.isEmpty {
+                    Text("오늘 있었던 일을 적어보세요")
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 8)
+                        .allowsHitTesting(false)
+                }
+                TextEditor(text: $userMessage)
+                    .focused($isTextFieldFocused)
+                    .scrollContentBackground(.hidden)
+            }
             .font(.diaryBody)
-
-            Spacer()
+            .padding(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
 
             #if DEBUG
             Toggle("시스템 프롬프트", isOn: $enableSystemPrompt)
