@@ -65,10 +65,12 @@ struct DiaryDetailScreen: View {
         defer { isGenerating = false }
 
         do {
-            entry.feedback = try await feedbackService.generate(
+            let result = try await feedbackService.generate(
                 for: entry,
                 includeSystemPrompt: true
             )
+            entry.retelling = result.retelling
+            entry.feedback = result.comment
             try modelContext.save()
         } catch {
             logger.error("\(error.localizedDescription, privacy: .public)")

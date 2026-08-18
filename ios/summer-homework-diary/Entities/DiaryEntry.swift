@@ -16,6 +16,7 @@ final class DiaryEntry {
     var valence: Valence = Valence.neutral
     var emotions: [Emotion] = []
     var feedback: String?
+    var retelling: String?
 
     init(
         date: Date = .now,
@@ -23,7 +24,8 @@ final class DiaryEntry {
         weather: Weather? = nil,
         valence: Valence = .neutral,
         emotions: [Emotion] = [],
-        feedback: String? = nil
+        feedback: String? = nil,
+        retelling: String? = nil
     ) {
         self.id = UUID()
         self.date = date
@@ -32,6 +34,7 @@ final class DiaryEntry {
         self.valence = valence
         self.emotions = emotions
         self.feedback = feedback
+        self.retelling = retelling
     }
 
     var firstSentence: String {
