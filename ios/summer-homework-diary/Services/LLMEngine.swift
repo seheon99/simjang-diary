@@ -56,7 +56,7 @@ actor LLMEngine {
 
     private let model: ModelContainer
     private let systemPrompt: String
-    private let retellPrompt: String
+    private let retellPrompt: String?
 
     private let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "simjang",
@@ -78,7 +78,7 @@ actor LLMEngine {
             throw LLMEngineError.modelNotFound(modelName)
         }
         systemPrompt = try Self.loadPrompt(named: "system-prompt")
-        retellPrompt = try Self.loadPrompt(named: "retell-prompt")
+        retellPrompt = try? Self.loadPrompt(named: "retell-prompt")
 
         logger.debug("Loading Start")
         logger.debug("\(Memory.snapshot().description, privacy: .public)")
@@ -107,6 +107,10 @@ actor LLMEngine {
 
     func retell(diary: DiaryEntry) async throws -> String {
         logger.debug("Retell Start")
+
+        guard let retellPrompt else {
+            throw LLMEngineError.promptNotFound("retell-prompt")
+        }
 
         let session = ChatSession(
             model,
