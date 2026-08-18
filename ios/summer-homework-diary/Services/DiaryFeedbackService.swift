@@ -11,8 +11,9 @@ struct DiaryFeedbackService {
         includeSystemPrompt: Bool
     ) async throws -> String {
         let engine = try await LLMEngine(modelName: modelName)
-        return try await engine.generate(
+        return try await engine.comment(
             diary: entry,
+            retelling: nil,
             includeSystemPrompt: includeSystemPrompt
         )
     }
