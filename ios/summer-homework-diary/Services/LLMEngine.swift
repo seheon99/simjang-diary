@@ -12,6 +12,7 @@ import MLXLLM
 import MLX
 import Tokenizers
 
+import Darwin
 import OSLog
 
 enum LLMEngineError: LocalizedError {
@@ -61,10 +62,15 @@ actor LLMEngine {
         category: "Performance"
     )
 
+    private static let memoryReserve = 300 * 1024 * 1024 // 300 MiB, measured on iPhone 13 mini (4GB)
+
     init(modelName: String) async throws {
-        Memory.memoryLimit = 2 * 1024 * 1024 * 1024 // 2 GiB
+        let available = Int(os_proc_available_memory())
+        if available > Self.memoryReserve {
+            Memory.memoryLimit = available - Self.memoryReserve
+        }
         Memory.cacheLimit = 2 * 1024 * 1024 // 2 MiB
-        
+
         self.modelName = modelName
 
         guard
