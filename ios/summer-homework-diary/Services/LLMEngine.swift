@@ -46,9 +46,7 @@ actor LLMEngine {
     private static let dateFormatter: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withFullDate]
-        // Must be the local zone. ISO8601DateFormatter defaults to GMT, which
-        // would label a diary written at 08:00 KST as the previous day.
-        formatter.timeZone = .current
+        formatter.timeZone = .current  // default is GMT; 08:00 KST would read as yesterday
         return formatter
     }()
 

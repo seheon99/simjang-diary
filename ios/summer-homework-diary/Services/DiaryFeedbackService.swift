@@ -17,9 +17,7 @@ struct DiaryFeedbackService {
     ) async throws -> Output {
         let engine = try await LLMEngine(modelName: modelName)
 
-        // The retelling is an enhancement to the comment, never a
-        // precondition for it. A failed or empty retelling degrades to
-        // the previous behavior rather than failing the whole request.
+        // retell is best-effort; must never block the comment
         let retelling: String?
         if let raw = try? await engine.retell(diary: entry) {
             let sanitized = RetellingText.sanitize(raw)

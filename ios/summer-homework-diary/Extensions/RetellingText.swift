@@ -6,11 +6,9 @@
 import Foundation
 
 enum RetellingText {
-    /// Removes chat-template special tokens (e.g. `<|eot_id|>`) that some
-    /// model builds emit into generated text, then trims surrounding whitespace.
     static func sanitize(_ raw: String) -> String {
         raw
-            .replacing(#/<\|[^|>]*\|>/#, with: "")
+            .replacing(#/<\|[^|>]*\|>/#, with: "")  // for <|eot_id|>
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
