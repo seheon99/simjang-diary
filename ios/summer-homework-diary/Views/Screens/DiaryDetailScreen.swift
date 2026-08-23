@@ -38,25 +38,34 @@ struct DiaryDetailScreen: View {
                 if let feedback = entry.feedback {
                     Text(feedback)
                         .font(.diaryComment)
+
+                    #if DEBUG
+                    regenerateButton
+                    #endif
                 } else {
-                    Button {
-                        Task { await retryFeedback() }
-                    } label: {
-                        if isGenerating {
-                            ProgressView()
-                        } else {
-                            Label("답글 다시 만들기", systemImage: "arrow.clockwise")
-                        }
-                    }
-                    .buttonStyle(.glassProminent)
-                    .disabled(isGenerating)
-                    .tint(.taupe700)
+                    regenerateButton
                 }
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .statusBarHidden(true)
+    }
+
+    private var regenerateButton: some View {
+        Button {
+            Task { await retryFeedback() }
+        } label: {
+            if isGenerating {
+                ProgressView()
+            } else {
+                Label("답글 다시 만들기", systemImage: "arrow.clockwise")
+            }
+        }
+        .buttonStyle(.glassProminent)
+        .disabled(isGenerating)
+        .tint(.taupe700)
+        .foregroundStyle(Color.neutral50)
     }
 
     @MainActor
