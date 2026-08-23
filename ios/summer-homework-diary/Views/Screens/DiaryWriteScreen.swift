@@ -295,7 +295,8 @@ struct DiaryWriteScreen: View {
                 includeSystemPrompt: enableSystemPrompt
             )
 
-            entry.feedback = result
+            entry.retelling = result.retelling
+            entry.feedback = result.comment
             try modelContext.save()
 
             userMessage = ""

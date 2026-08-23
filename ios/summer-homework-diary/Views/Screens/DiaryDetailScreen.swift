@@ -38,19 +38,12 @@ struct DiaryDetailScreen: View {
                 if let feedback = entry.feedback {
                     Text(feedback)
                         .font(.diaryComment)
+
+                    #if DEBUG
+                    regenerateButton
+                    #endif
                 } else {
-                    Button {
-                        Task { await retryFeedback() }
-                    } label: {
-                        if isGenerating {
-                            ProgressView()
-                        } else {
-                            Label("답글 다시 만들기", systemImage: "arrow.clockwise")
-                        }
-                    }
-                    .buttonStyle(.glassProminent)
-                    .disabled(isGenerating)
-                    .tint(.taupe700)
+                    regenerateButton
                 }
             }
             .padding()
@@ -59,16 +52,34 @@ struct DiaryDetailScreen: View {
         .statusBarHidden(true)
     }
 
+    private var regenerateButton: some View {
+        Button {
+            Task { await retryFeedback() }
+        } label: {
+            if isGenerating {
+                ProgressView()
+            } else {
+                Label("답글 다시 만들기", systemImage: "arrow.clockwise")
+            }
+        }
+        .buttonStyle(.glassProminent)
+        .disabled(isGenerating)
+        .tint(.taupe700)
+        .foregroundStyle(Color.neutral50)
+    }
+
     @MainActor
     private func retryFeedback() async {
         isGenerating = true
         defer { isGenerating = false }
 
         do {
-            entry.feedback = try await feedbackService.generate(
+            let result = try await feedbackService.generate(
                 for: entry,
                 includeSystemPrompt: true
             )
+            entry.retelling = result.retelling
+            entry.feedback = result.comment
             try modelContext.save()
         } catch {
             logger.error("\(error.localizedDescription, privacy: .public)")
